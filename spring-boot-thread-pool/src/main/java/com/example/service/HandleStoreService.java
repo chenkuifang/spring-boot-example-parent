@@ -7,9 +7,5 @@ package com.example.service;
  * @version V1.0
  **/
 public interface HandleStoreService {
-
-    /**
-     * 减库存
-     */
-    int subStore(int store);
+    void doSomething();
 }

@@ -18,6 +18,9 @@ public class IndexController {
     @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
+    @Autowired
+    private HelloWorldTask helloWorldTask;
+
     @GetMapping
     public String index() {
         return "index";
@@ -25,8 +28,8 @@ public class IndexController {
 
     @GetMapping("/ec")
     public void executor() {
-        HelloWorldTask helloWorldTask = new HelloWorldTask(20);
         for (int i = 0; i < 20; i++) {
+            // 执行任务
             threadPoolTaskExecutor.execute(helloWorldTask);
         }
     }

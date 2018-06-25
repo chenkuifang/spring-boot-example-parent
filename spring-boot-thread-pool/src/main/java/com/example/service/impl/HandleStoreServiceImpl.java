@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class HandleStoreServiceImpl implements HandleStoreService {
     @Override
-    public int subStore(int store) {
-        return 1;
+    public void doSomething() {
+        System.err.println(123);
     }
 }

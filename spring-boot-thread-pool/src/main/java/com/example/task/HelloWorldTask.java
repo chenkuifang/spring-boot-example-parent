@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 测试任务
+ * 该任务交由线程池去决定什么时候执行
  *
  * @author QuiFar
  * @version V1.0
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HelloWorldTask implements Runnable {
 
-    private int store;
+    private int store = 20;
 
     @Autowired
     private HandleStoreService handleStoreService;
@@ -30,10 +31,8 @@ public class HelloWorldTask implements Runnable {
     @Override
     public void run() {
         synchronized (HelloWorldTask.class) {
-            //log.info("hello world");
+            handleStoreService.doSomething();
             //log.info("store:{}", store--);
-            store = handleStoreService.subStore(store);
-            log.info("store:{}", store);
         }
     }
 }
