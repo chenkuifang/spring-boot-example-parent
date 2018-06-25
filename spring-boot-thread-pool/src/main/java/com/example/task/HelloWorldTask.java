@@ -3,7 +3,6 @@ package com.example.task;
 import com.example.service.HandleStoreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * 测试任务
@@ -13,10 +12,10 @@ import org.springframework.stereotype.Component;
  * @version V1.0
  **/
 @Slf4j
-@Component
+//@Component 使用  @Bean() 注入了
 public class HelloWorldTask implements Runnable {
 
-    private int store = 20;
+    private int store;
 
     @Autowired
     private HandleStoreService handleStoreService;
@@ -31,8 +30,8 @@ public class HelloWorldTask implements Runnable {
     @Override
     public void run() {
         synchronized (HelloWorldTask.class) {
-            handleStoreService.doSomething();
-            //log.info("store:{}", store--);
+            //handleStoreService.doSomething();
+            log.info("store:{}", store--);
         }
     }
 }
