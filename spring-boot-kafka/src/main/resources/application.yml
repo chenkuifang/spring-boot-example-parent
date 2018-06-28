@@ -1,0 +1,19 @@
+spring:
+  kafka:
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      bootstrap-servers: 10.80.1.110:9092
+    consumer:
+      bootstrap-servers: 10.80.1.110:9092
+      group-id: test #消费群
+      auto-offset-reset: earliest
+      enable-auto-commit: false #非自动提交offset
+      auto-commit-interval: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    listener:
+      ack-mode: manual_immediate
