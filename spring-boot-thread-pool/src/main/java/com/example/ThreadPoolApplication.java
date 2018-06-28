@@ -12,7 +12,7 @@ public class ThreadPoolApplication {
         SpringApplication.run(ThreadPoolApplication.class, args);
     }
 
-    @Bean()
+    @Bean
     public HelloWorldTask helloWorldTask() {
         return new HelloWorldTask(20);
     }
