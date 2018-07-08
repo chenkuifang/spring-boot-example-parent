@@ -1,58 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.example</groupId>
-    <artifactId>spring-boot-example-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <name>spring-boot-example-parent</name>
-    <description>Demo project for Spring Boot</description>
-
-    <modules>
-        <module>spring-boot-thread-pool</module>
-		<module>spring-boot-mybatis</module>
-		<module>spring-boot-kafka</module>
-        <module>dubbo-spring-boot-parent</module>
-    </modules>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <!-- 没引入dubbo前是1.5.9.RELEASE -->
         <version>2.0.2.RELEASE</version>
         <relativePath/>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>dubbo-spring-boot-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>dubbo-spring-boot-parent</name>
+    <description>Demo project for Spring Boot</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <lombok.version>1.16.10</lombok.version>
     </properties>
+
+    <modules>
+        <module>dubbo-spring-boot-sample-api</module>
+        <module>dubbo-spring-boot-sample-consumer</module>
+        <module>dubbo-spring-boot-sample-provider</module>
+    </modules>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-		
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
-		</dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
     </dependencies>
 
