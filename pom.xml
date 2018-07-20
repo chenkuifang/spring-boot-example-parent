@@ -14,8 +14,10 @@
         <module>spring-boot-thread-pool</module>
 		<module>spring-boot-mybatis</module>
 		<module>spring-boot-kafka</module>
+		<module>spring-boot-rabbitmq</module>
         <module>dubbo-spring-boot-parent</module>
         <module>spring-boot-define-annotation</module>
+		<module>spring-boot-sharding-sphere</module>
     </modules>
 
     <parent>

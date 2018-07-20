@@ -1,4 +1,4 @@
-package com.example.springbootkafka;
+package com.example.springbootrabbitmq;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
