@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 配置消息队列
+ * 声明消息队列
  *
  * @author QuiFar
  * @version V1.0
@@ -33,7 +33,7 @@ public class QueueConfig {
 
     /**
      * 按照规则绑定队列
-     * routing_key 如何绑定到queue,由exchange的类型计算
+     * 基于消息的交换器类型和路由键，服务器会决定消息投送到哪个队列上去
      *
      * @param topicQueue 队列
      * @param exchange   需要绑定的交换器

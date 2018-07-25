@@ -18,6 +18,7 @@
         <module>dubbo-spring-boot-parent</module>
         <module>spring-boot-define-annotation</module>
 		<module>spring-boot-sharding-sphere</module>
+		<module>spring-boot-elasticsearch</module>
     </modules>
 
     <parent>

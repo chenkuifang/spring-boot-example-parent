@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+#需要未授权访问Acuator 端点
+management:
+  security:
+    enabled: false
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes: 10.80.1.110:9300
+      cluster-name: elasticsearch

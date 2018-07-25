@@ -17,7 +17,7 @@ public class TopicController {
 
     @GetMapping("/topic")
     public void sendMsg() {
-        producer.send("exchange", "topic.23456469.sdfs.fsesf.sdfsd", "topic test");
+        producer.send("exchange", "topic.hello", "topic test");
     }
 
 }
