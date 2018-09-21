@@ -26,7 +26,7 @@ public final class XmlParamsGenerateUtils {
     public static String getDrugstoreOrderApiXmlParams(String companyPwd
             , String companyNum, String orderData) throws Exception {
         //String invokeMethod = "saveOrderInfo";
-        String invokeMethod = "getOrder";
+        String invokeMethod = "getOrderByPost";
         return getDrugstoreApiXmlParams(invokeMethod, companyPwd, companyNum, orderData);
     }
 
@@ -60,17 +60,18 @@ public final class XmlParamsGenerateUtils {
         content.append("<data>");
         content.append(dataParams);
         content.append("</data>");
+        content.append("</orderInfo>");
 
         StringBuilder params;
         params = new StringBuilder();
         params.append("<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"  >");
-        params.append("<soap:Header>");
-        params.append("<username>quifar</username>");
-        params.append("<password>123456</password>");
-        params.append("</soap:Header>");
+        //params.append("<soap:Header>");
+        //params.append("<username>quifar</username>");
+        //params.append("<password>123456</password>");
+        //params.append("</soap:Header>");
         params.append("<soap:Body>");
         // params.append("<ns1:").append(invokeMethod).append(" xmlns:ns1=\"http://factory.service.cxf.kangmei.com/\">");
-        params.append("<ns1:").append(invokeMethod).append(" xmlns:ns1=\"http://localhost:8085/ws/orderService?wsdl\" >");
+        params.append("<ns1:").append(invokeMethod).append(" xmlns:ns1=\"http://localhost:8085/ws/\">");
 
         // request
         params.append("<request>");
