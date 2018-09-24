@@ -5,6 +5,13 @@
 
     <artifactId>spring-boot-ws-cxf-provide</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${org.json.version}</version>
+        </dependency>
+    </dependencies>
     <packaging>jar</packaging>
 
     <name>spring-boot-ws-cxf-provide</name>

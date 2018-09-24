@@ -17,7 +17,6 @@ import java.io.UnsupportedEncodingException;
 @RestController
 public class IndexController {
 
-
     // 成功
     @GetMapping("/index")
     public String test() throws UnsupportedEncodingException {

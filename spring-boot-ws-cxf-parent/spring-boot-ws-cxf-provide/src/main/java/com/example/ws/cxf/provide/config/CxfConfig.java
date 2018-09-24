@@ -1,5 +1,8 @@
 package com.example.ws.cxf.provide.config;
 
+import com.example.ws.cxf.provide.interceptor.CxfAuthenticationInterceptor;
+import com.example.ws.cxf.provide.interceptor.CxfResponseInterceptor;
+import com.example.ws.cxf.provide.interceptor.MyFaultOutInterceptor;
 import com.example.ws.cxf.provide.webservice.UserService;
 import com.example.ws.cxf.provide.webservice.impl.UserServiceImpl;
 import org.apache.cxf.Bus;
@@ -40,6 +43,20 @@ public class CxfConfig {
     public Endpoint endpoint() {
         EndpointImpl endpoint = new EndpointImpl(springBus(), userService());
         endpoint.publish("/userService");
+
+        // 添加请求拦截器
+        endpoint.getInInterceptors().add(cxfAuthenticationInterceptor());
+
+        endpoint.getOutFaultInterceptors().add(new MyFaultOutInterceptor());
+
+        // 添加响应拦截器
+        endpoint.getOutInterceptors().add(new CxfResponseInterceptor());
         return endpoint;
+    }
+
+
+    @Bean
+    public CxfAuthenticationInterceptor cxfAuthenticationInterceptor() {
+        return new CxfAuthenticationInterceptor();
     }
 }

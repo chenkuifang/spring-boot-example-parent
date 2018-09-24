@@ -9,7 +9,9 @@
 
     <name>spring-boot-ws-cxf-parent</name>
     <description>Demo project for Spring Boot</description>
-
+    <properties>
+        <org.json.version>20180130</org.json.version>
+    </properties>
     <parent>
         <groupId>com.example</groupId>
         <artifactId>spring-boot-example-parent</artifactId>
