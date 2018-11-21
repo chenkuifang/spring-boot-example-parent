@@ -22,7 +22,7 @@ public class MyFaultOutInterceptor extends AbstractPhaseInterceptor<Message> {
 
     public MyFaultOutInterceptor() {
         super(Phase.PRE_PROTOCOL);
-        getAfter().add(CxfAuthenticationInterceptor.class.getName());
+        getAfter().add(CxfAuthenticationInterceptor4SaajIn.class.getName());
         //super(Phase.PRE_INVOKE);
     }
 

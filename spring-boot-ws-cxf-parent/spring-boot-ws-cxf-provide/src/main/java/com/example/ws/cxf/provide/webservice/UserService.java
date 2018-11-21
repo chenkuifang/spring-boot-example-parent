@@ -15,6 +15,6 @@ public interface UserService {
     String getName(@WebParam(name = "name") String name);
 
     @WebMethod
-    String getUser(long userId);
+    String getUser(@WebParam(name = "request") String request);
 
 }

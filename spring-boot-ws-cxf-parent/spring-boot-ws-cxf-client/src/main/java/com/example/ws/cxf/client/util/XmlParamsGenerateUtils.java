@@ -51,11 +51,11 @@ public final class XmlParamsGenerateUtils {
         content.append("<orderInfo>");
 
         // head
-        content.append("<head8>");
-        content.append("<company_num1>").append(companyNum).append("</company_num1>");
+        content.append("<head>");
+        content.append("<company_num>").append(companyNum).append("</company_num>");
         content.append("<key>").append(key).append("</key>");
         content.append("<sign>").append(sign).append("</sign>");
-        content.append("</head8>");
+        content.append("</head>");
 
         // data
         content.append("<data>");
@@ -66,10 +66,6 @@ public final class XmlParamsGenerateUtils {
         StringBuilder params;
         params = new StringBuilder();
         params.append("<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"  >");
-        //params.append("<soap:Header>");
-        //params.append("<username>quifar</username>");
-        //params.append("<password>123456</password>");
-        //params.append("</soap:Header>");
         params.append("<soap:Body>");
         // params.append("<ns1:").append(invokeMethod).append(" xmlns:ns1=\"http://factory.service.cxf.kangmei.com/\">");
         //params.append("<ns1:").append(invokeMethod).append(" xmlns:ns1=\"http://localhost:8085/ws/\">");
@@ -78,6 +74,7 @@ public final class XmlParamsGenerateUtils {
         // request
         params.append("<request>");
         params.append(Base64.encodeBase64String(content.toString().getBytes("UTF-8")));
+        //params.append(content.toString());
         params.append("</request>");
 
         params.append("</ns1:").append(invokeMethod).append(">");

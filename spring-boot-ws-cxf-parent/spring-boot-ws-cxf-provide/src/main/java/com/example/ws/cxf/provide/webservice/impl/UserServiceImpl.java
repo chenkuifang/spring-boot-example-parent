@@ -3,6 +3,7 @@ package com.example.ws.cxf.provide.webservice.impl;
 import com.example.ws.cxf.provide.webservice.UserService;
 import org.springframework.stereotype.Service;
 
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 /**
@@ -20,7 +21,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String getUser(long userId) {
-        return "getUser " + userId;
+    public String getUser(String request) {
+
+        return "getUser 获取客户端参数：" + request;
     }
 }

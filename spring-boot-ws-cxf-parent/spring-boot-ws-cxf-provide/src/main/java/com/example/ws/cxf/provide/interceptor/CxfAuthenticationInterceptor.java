@@ -1,26 +1,24 @@
 package com.example.ws.cxf.provide.interceptor;
 
-import com.example.ws.cxf.provide.util.XmlParseJsonUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.cxf.binding.soap.SoapMessage;
-import org.apache.cxf.binding.soap.saaj.SAAJInInterceptor;
 import org.apache.cxf.interceptor.Fault;
+import org.apache.cxf.interceptor.StaxOutInterceptor;
+import org.apache.cxf.message.Exchange;
 import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.apache.cxf.service.Service;
+import org.apache.cxf.service.invoker.MethodDispatcher;
+import org.apache.cxf.service.model.BindingOperationInfo;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.Node;
 
-import javax.xml.soap.SOAPBody;
-import javax.xml.soap.SOAPException;
-import javax.xml.soap.SOAPHeader;
-import javax.xml.soap.SOAPMessage;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.Base64;
-
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * cxf认证拦截器
@@ -34,100 +32,55 @@ import java.util.Base64;
 @Component
 public class CxfAuthenticationInterceptor extends AbstractPhaseInterceptor<SoapMessage> {
 
-    private SAAJInInterceptor saajIn = new SAAJInInterceptor();
-
     public CxfAuthenticationInterceptor() {
-        super(Phase.PROTOCOL);
-        getAfter().add(SAAJInInterceptor.class.getName());
+        super(Phase.PRE_INVOKE);
     }
 
     @Override
     public void handleMessage(SoapMessage message) throws Fault {
-        String str = null;
-        try {
 
-            SOAPMessage doc = message.getContent(SOAPMessage.class);
+        // 获取方法信息
+        Exchange exchange = message.getExchange();
+        BindingOperationInfo bop = exchange.get(BindingOperationInfo.class);
+        MethodDispatcher md = (MethodDispatcher) exchange.get(Service.class).get(MethodDispatcher.class.getName());
+        Method method = md.getMethod(bop);
+        String methodName = method.getName();
+        System.out.println("方法命名：" + methodName);
 
-            if (doc == null) {
-                saajIn.handleMessage(message);
-                doc = message.getContent(SOAPMessage.class);
-            }
-
-            // 获取SoapHeader
-            SOAPHeader header = doc.getSOAPHeader();
-            if (header == null) {
-                return;
-            }
-
-            //获取SoapHeader
-            SOAPBody body = doc.getSOAPBody();
-            if (body == null) {
-                return;
-            }
-
-            Node node = body.getChildNodes().item(0);
-            String requestMethod = node.getLocalName();
-            String requestParams = node.getTextContent();
-            byte[] decode = Base64.getDecoder().decode(requestParams.getBytes());
-            String decodeParams = new String(decode, "utf-8");
-            System.err.println("请求方法: " + requestMethod);
-            System.err.println("请求参数： " + decodeParams);
-
-            JSONObject jsonBody = XmlParseJsonUtils.xml2Json(decodeParams);
-
-            String authResult = authenticationHandler(jsonBody.getJSONObject("orderInfo"));
-            if (StringUtils.isNotBlank(authResult)) {
-                throw new Fault(new IOException(authResult));
-            }
-
-        } catch (SOAPException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private String authenticationHandler(JSONObject params) {
-        int companyNum;
-        try {
-
-            if (!params.has("head") || !params.has("data")) {
-                return "请求参数必须包含head节点和data节点。";
-            }
-
-            // sign  companyPass 不一定都存在，物流认证不存在companyPass
-            JSONObject head = params.getJSONObject("head");
-            if (!(head.has("key") &&
-                    (head.has("sign")
-                            || head.has("company_pass")))) {
-                return "请求参数不全。";
-            }
-
-            if (head.has("company_pass")) {
-                String companyPass = head.getString("company_pass");
-               /* if (!companyPass.equals(offOper.getCompanyPass())) {
-                    return "密码错误。";
-                }*/
-            }
-
-            if (head.has("key")) {
-                String key = head.get("key").toString();
-                Long sc = System.currentTimeMillis();
-                System.err.println(sc);
-                Long keyLong = Long.parseLong(key);
-                if (Math.abs(sc - keyLong) > 5 * 1000 * 60L) {
-                    return "时间戳差别大于5分钟。";
-                }
-            }
-
-        } catch (JSONException e) {
-            log.error("请求参数解析异常:{},请求参数:{}", e.getMessage(), params);
-            return "请求参数解析异常。";
+        if (methodName.equalsIgnoreCase("getUser")) {
+            throw new Fault(new IllegalArgumentException("就是不给你调用我的方法"));
         }
 
-        return null;
+        // 获取参数
+        List<?> content = message.getContent(List.class);
+        System.out.println("请求参数：" + content.get(0));
+
     }
 
+    @Override
+    public void handleFault(SoapMessage message) {
+        super.handleFault(message);
+        try {
+            System.err.println("请求捕获到异常处理...");
 
+            OutputStream os = new ByteArrayOutputStream(1024);
+
+            IOUtils.copy(new ByteArrayInputStream("xxxx你妹".getBytes()), os);
+
+
+            os.flush();
+            message.setContent(OutputStream.class, os);
+
+            //Exception exception = new Exception();
+
+
+//            message.setContent(Exception.class, );
+            //System.err.println("异常内容：" + fault.getMessage());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // super.handleFault(message);
+    }
 }
