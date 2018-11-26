@@ -1,4 +1,4 @@
-package com.example.java8new.stream;
+package com.example.springbootjava8new.stream;
 
 import org.junit.Test;
 
@@ -7,14 +7,10 @@ import java.util.List;
 import java.util.stream.Stream;
 
 /**
- * list 测试
- * 1.从List数据源的stream()方法中获取一个流
- *
  * @author Quifar
  * @version V1.0
  **/
 public class ListTest {
-
     List<String> dataList = Arrays.asList("abc", "zkf", "ghi", "jk");
 
     @Test
