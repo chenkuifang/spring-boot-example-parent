@@ -22,6 +22,7 @@
 		<module>spring-boot-sharding-sphere</module>
 		<module>spring-boot-elasticsearch</module>
         <module>spring-boot-ws-cxf-parent</module>
+        <module>spring-boot-java8new</module>
     </modules>
 
     <parent>
