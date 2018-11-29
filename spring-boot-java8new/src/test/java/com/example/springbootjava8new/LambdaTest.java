@@ -11,10 +11,10 @@ import java.util.List;
  * lambda 表达式允许使用接口实现作为参数传递
  * 1.引入 -> 符号：lambda操作符，左边为参数列表，右边为lambda体（接口实现体）
  * 2.需要函数式接口的支持（只有一个抽象方法的接口，并且使用@FunctionInterface注解），内置主要有
- * 2.1 Function 函数型
- * 2.2 Consumer 消费型接口
- * 2.3 Predicate 断言
- * 2.4 Supplier 提供型
+ * 2.1 Function 函数型  接受一个输入参数，返回一个结果。
+ * 2.2 Consumer 消费型接口 代表了接受一个输入参数并且无返回的操作
+ * 2.3 Predicate 断言 接受一个输入参数，返回一个布尔值结果。
+ * 2.4 Supplier 提供型 无参数，返回一个结果。
  *
  * @author Quifar
  * @version V1.0
