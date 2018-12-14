@@ -2,10 +2,7 @@ package com.example.springbootjava8new;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * lambda 表达式允许使用接口实现作为参数传递
@@ -20,7 +17,7 @@ import java.util.List;
  * @version V1.0
  **/
 public class LambdaTest {
-    List<String> data = Arrays.asList("qq", "bb", "zz", "ee");
+    List<String> data = Arrays.asList("a", "z", "c", "e");
 
     @Test
     public void test1() {
@@ -38,6 +35,9 @@ public class LambdaTest {
         }
     }
 
+    /**
+     * sort操作，属于中间操作
+     */
     @Test
     public void test2() {
         // 使用lambda表达式
@@ -47,4 +47,52 @@ public class LambdaTest {
 
         data.forEach(System.err::println);
     }
+
+    /**
+     * filter操作，filter属于中间操作，返回Stream ，所以还可以做其他的Stream操作
+     * foreach操作属于最终操作，某个流执行了最终操作后，就不能再做其他的Stream操作了
+     */
+    @Test
+    public void test3() {
+        data.parallelStream()
+                .filter(x -> x.startsWith("q")) // 中间操作
+                .forEach(System.err::println); //  最终操作
+    }
+
+    /**
+     * 中间操作map会将元素根据指定的Function接口来依次将元素转成另外的对象.
+     */
+    @Test
+    public void test4() {
+        data.parallelStream()
+                .map(String::toUpperCase)
+                .map(x -> x + "quifar")
+                .sorted(String::compareTo)
+                .forEach(System.err::println);
+    }
+
+    /**
+     * match操作、count操作属于最终操作
+     */
+    @Test
+    public void test5() {
+        boolean a = data.stream().anyMatch(x -> x.equals("a"));
+        System.err.println(a);
+
+        long count = data.stream()
+                .filter((s) -> s.startsWith("a"))
+                .count();
+        System.err.println(count);
+    }
+
+    /**
+     * reduce操作属于最终操作
+     * 允许通过指定的函数来将stream中的多个元素规约为一个元素，规约后的结果是通过Optional接口表示的。
+     */
+    @Test
+    public void test6() {
+        Optional<String> reduce = data.stream().reduce((x, y) -> x + "#" + y);
+        reduce.ifPresent(System.err::print);//a#z#c#e
+    }
+
 }
