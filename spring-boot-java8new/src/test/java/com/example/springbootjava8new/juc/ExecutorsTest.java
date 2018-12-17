@@ -39,6 +39,7 @@ public class ExecutorsTest {
     public void test1() {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.submit(new Task());
+        executorService.shutdown();
     }
 
     class Task implements Runnable {
@@ -50,17 +51,41 @@ public class ExecutorsTest {
 
     /**
      * 创建一个指定大小的线程池，并提交一个有返回的任务
+     * <p>
+     * 使用场景：
+     * FutureTask可用于异步获取执行结果或取消执行任务的场景。通过传入Runnable或者Callable的任务给FutureTask
+     * ，直接调用其run方法或者放入线程池执行，之后可以在外部通过FutureTask的get方法异步获取执行结果，
+     * 因此，FutureTask非常适合用于耗时的计算，主线程可以在完成自己的任务后，
+     * 再去获取结果。另外，FutureTask还可以确保即使调用了多次run方法，它都只会执行一次Runnable或者Callable任务
+     * ，或者通过cancel取消FutureTask的执行等。
      */
     @Test
     public void test2() throws ExecutionException, InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(5);
         Future result = executorService.submit(new CallBackTask());
-        System.err.println(result.get());
+
+        // 模拟主线程执行时间6S
+        System.err.println(Thread.currentThread().getName());
+        Thread.sleep(6000);
+
+        // 主线程可以在完成自己的任务后，再去获取结果
+        System.err.println(result.get()); //  get()方法会使所在线程阻塞，直到返回结果。
+        executorService.shutdown();
     }
 
+    /**
+     * 注意：get()方法会使所在线程阻塞，直到返回结果。
+     */
     class CallBackTask implements Callable<String> {
         @Override
         public String call() {
+            try {
+                System.err.println(Thread.currentThread().getName());
+                Thread.sleep(5000);
+                System.err.println(Thread.currentThread().getName() + "执行完成");
+            } catch (InterruptedException e) {
+
+            }
             return "I'm callback info!!";
         }
     }
