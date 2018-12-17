@@ -8,9 +8,9 @@ import java.util.concurrent.CountDownLatch;
  * @author Quifar
  * @version V1.0
  **/
-public class CountDownLatchTest1 {
+public class CountDownLatchTest {
 
-    private static CountDownLatch countDownLatch = new CountDownLatch(5);
+    private static volatile CountDownLatch countDownLatch = new CountDownLatch(5);
 
     /**
      * Boss线程，等待员工到达开会
@@ -20,6 +20,7 @@ public class CountDownLatchTest1 {
         public void run() {
             System.out.println("Boss在会议室等待，总共有" + countDownLatch.getCount() + "个人开会...");
             try {
+
                 //Boss等待
                 countDownLatch.await();
             } catch (InterruptedException e) {
@@ -44,6 +45,11 @@ public class CountDownLatchTest1 {
     public void test() {
         //Boss线程启动
         new BossThread().start();
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+        }
 
         for (int i = 0; i < countDownLatch.getCount(); i++) {
             new EmployeeThread().start();

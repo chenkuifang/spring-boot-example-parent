@@ -23,6 +23,8 @@ import java.util.stream.Stream;
 public class ListTest {
     List<String> dataList = Arrays.asList("abc", "zkf", "ghi", "jk");
 
+    List<String> dataList1 = Arrays.asList("abc", "123456", "ghi", "785");
+
     // 1.foreach迭代
     @Test
     public void test1() {
@@ -76,7 +78,7 @@ public class ListTest {
         System.err.println(result);
     }
 
-    // 串行流与并行流对比
+    // 6.串行流与并行流对比
     @Test
     public void test7() {
         List<String> values = new ArrayList<>(1000000);
@@ -109,5 +111,12 @@ public class ListTest {
         long t1 = System.nanoTime();
         long millis = TimeUnit.NANOSECONDS.toMillis(t1 - t0);
         System.out.println(String.format("parallel sort took: %d ms", millis));
+    }
+
+    @Test
+    public void test9() {
+        List<List<Object>> allCourses = new ArrayList<>();
+
+
     }
 }
