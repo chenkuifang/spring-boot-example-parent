@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.example.demo.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> list(Map<String, Object> params) {
 		return userMapper.list(params);
+	}
+
+	@Override
+	public List<UserDTO> listPage() {
+		return userMapper.listPage();
 	}
 
 	@Override
