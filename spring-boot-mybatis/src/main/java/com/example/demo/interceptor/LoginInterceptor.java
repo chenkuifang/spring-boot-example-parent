@@ -12,7 +12,6 @@ import com.example.demo.common.Constants;
  * @author QuiFar
  * @version V1.0
  * @Description: 登陆拦截器
- * @date 2017年11月19日 下午6:01:32
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
@@ -20,7 +19,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         String path = request.getServletPath();
-        System.err.println(path);
         if (path.matches(Constants.NO_INTERCEPTOR_PATH)) {
             return true;
         } else {
@@ -31,6 +29,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 return false;
             }
 
+            // 这里也可以使用jwt校验token是否有效来做权限校验
         }
         return true;
     }

@@ -1,10 +1,8 @@
 package com.example.demo.config;
 
-import com.example.demo.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * 配置各个注册器
@@ -21,12 +19,12 @@ public class WebRegistryConfig implements WebMvcConfigurer {
         // 多个拦截器组成一个拦截器链
         // addPathPatterns 用于添加拦截规则
         // excludePathPatterns 用户排除拦截
-        registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/test/**")
-                .excludePathPatterns("/error")
-                .excludePathPatterns("/index")
-                .excludePathPatterns("/upload/**");
+//        registry.addInterceptor(new LoginInterceptor())
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/test/**")
+//                .excludePathPatterns("/error")
+//                .excludePathPatterns("/index")
+//                .excludePathPatterns("/upload/**");
 
         //super.addInterceptors(registry);
     }

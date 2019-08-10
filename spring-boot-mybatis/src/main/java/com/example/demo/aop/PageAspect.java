@@ -37,8 +37,7 @@ public class PageAspect {
      */
     private static final String PAGE_INTERCEPTOR_PATH = "page";
 
-    //@Pointcut(value = "execution(* *..com.example.demo.controller..*(..))")\
-    @Pointcut(value = "this(com.example.demo.controller.TestController)")
+    @Pointcut(value = "execution(* *..com.example.demo.controller..*(..))")
     public void pointcut() {
     }
 
