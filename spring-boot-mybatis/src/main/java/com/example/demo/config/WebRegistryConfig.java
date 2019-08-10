@@ -25,7 +25,8 @@ public class WebRegistryConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/test/**")
                 .excludePathPatterns("/error")
-                .excludePathPatterns("/index");
+                .excludePathPatterns("/index")
+                .excludePathPatterns("/upload/**");
 
         //super.addInterceptors(registry);
     }

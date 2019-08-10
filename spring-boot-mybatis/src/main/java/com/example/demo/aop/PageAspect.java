@@ -48,7 +48,7 @@ public class PageAspect {
         HttpServletRequest request = attributes.getRequest();
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        if (method.getName().startsWith(PAGE_INTERCEPTOR_PATH)) {
+        if (method.getName().contains(PAGE_INTERCEPTOR_PATH)) {
             if (!"GET".equalsIgnoreCase(request.getMethod())) {
                 throw new IllegalArgumentException("请使用Get请求。");
             }
