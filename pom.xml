@@ -21,14 +21,12 @@
 		<module>spring-boot-security-oauth2</module>
 		<module>spring-boot-sharding-sphere</module>
 		<module>spring-boot-elasticsearch</module>
-        <module>spring-boot-ws-cxf-parent</module>
         <module>spring-boot-java8new</module>
     </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <!-- 没引入dubbo前是1.5.9.RELEASE -->
         <version>2.0.2.RELEASE</version>
         <relativePath/>
     </parent>

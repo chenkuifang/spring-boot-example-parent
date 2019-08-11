@@ -9,7 +9,7 @@ import java.util.concurrent.*;
  * 1.继承Thread类，-->重新run() --> 启动：new MyThread().start()
  * 2.实现Runnable接口,--->重写run()--->启动：new Thread(new MyRunnable()).start
  * 3.实现Callable接口(配合ExecutorService使用)，--->重写call()--->创建线程池：ExecutorService executorService = Executors.newFixedThreadPool(5);
- * -->  Future result = executorService.sumbit(new MyCallable()); -->result.get() 获取返回值
+ * -->  Future result = executorService.submit(new MyCallable()); -->result.get() 获取返回值
  * 4. 当然还可以使用JDK提供的线程池创建方式，一般使用Executors工具类。
  * <p>
  * <p>
