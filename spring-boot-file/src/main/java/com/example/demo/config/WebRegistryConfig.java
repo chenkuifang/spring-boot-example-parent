@@ -31,6 +31,7 @@ public class WebRegistryConfig implements WebMvcConfigurer {
     }
 
     /**
+     * 当上传文件存储的地址与部署的地址出于同一个物理机器时可以这样用
      * 定义文件上传的路径为spring boot的静态资源路径
      * 1.如果是类路径下的静态资源用classpath:定位
      * 2.如果是非类路径下，使用file:定位

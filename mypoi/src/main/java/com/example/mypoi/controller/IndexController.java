@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * index
+ * 使用原生poi工具类
  *
  * @author: Quifar
  * @version: 1.0
@@ -49,21 +49,19 @@ public class IndexController {
      * @param response
      * @throws IOException
      */
-    @GetMapping(value = "/excel", produces = {"application/octet-stream;charset=UTF-8"})
+    @GetMapping(value = "/download", produces = {"application/octet-stream;charset=UTF-8"})
     public void excel(HttpServletResponse response) throws IOException {
+        List<String> titleRow = CollUtil.newArrayList("姓名", "性别", "爱好", "学历");
         List<String> row1 = CollUtil.newArrayList("aa", "bb", "cc", "dd");
         List<String> row2 = CollUtil.newArrayList("aa1", "bb1", "cc1", "dd1");
         List<String> row3 = CollUtil.newArrayList("aa2", "bb2", "cc2", "dd2");
         List<String> row4 = CollUtil.newArrayList("aa3", "bb3", "cc3", "dd3");
         List<String> row5 = CollUtil.newArrayList("aa4", "bb4", "cc4", "dd4");
-        List<List<String>> rows = CollUtil.newArrayList(row1, row2, row3, row4, row5);
+        List<List<String>> rows = CollUtil.newArrayList(titleRow,row1, row2, row3, row4, row5);
         // 通过工具类创建writer，默认创建xls格式
         ExcelWriter writer = ExcelUtil.getWriter();
         // 一次性写出内容，使用默认样式，强制输出标题
         writer.write(rows, true);
-        //writer.addHeaderAlias()
-        //out为OutputStream，需要写出到的目标流
-
         //response为HttpServletResponse对象
         response.setContentType("application/vnd.ms-excel;charset=utf-8");
         //test.xls是弹出下载对话框的文件名，不能为中文，中文请自行编码

@@ -15,12 +15,12 @@ public class MyApplication {
 
 //    @Bean
 //    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
-//        ConcurrentKafkaListenerContainerFactory<String, String> factory =
+//        ConcurrentKafkaListenerContainerFactory<String, String> sftp =
 //                new ConcurrentKafkaListenerContainerFactory<>();
-//        factory.setConsumerFactory(consumerFactory());
+//        sftp.setConsumerFactory(consumerFactory());
 //        // enable batch listening
-//        factory.setBatchListener(true);
-//        return factory;
+//        sftp.setBatchListener(true);
+//        return sftp;
 //    }
 
 

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import cn.hutool.core.io.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,9 +55,10 @@ public class UploadController {
             log.error(e.toString(), e);
             response.getWriter().write("上传失败");
         }
-        model.addAttribute("imgPath","/img/"+fileName);
+
+        //保存到数据库的路径
+        model.addAttribute("imgPath", "/img/" + fileName);
         return "upload";
     }
-
 
 }
